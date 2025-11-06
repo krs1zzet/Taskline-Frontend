@@ -8,3 +8,4 @@ const fallback: AppConfig = {
 
 export const config: AppConfig =
   (window as any).__APP_CONFIG__ ? (window as any).__APP_CONFIG__ : fallback;
+//config
