@@ -55,7 +55,7 @@ jobs:
             ghcr.io/${{ steps.lower.outputs.owner_lc }}/taskline-frontend:${{ github.sha }}
           cache-from: type=registry,ref=ghcr.io/${{ steps.lower.outputs.owner_lc }}/taskline-frontend:cache
           cache-to: type=registry,ref=ghcr.io/${{ steps.lower.outputs.owner_lc }}/taskline-frontend:cache,mode=max
-
+ 
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push
