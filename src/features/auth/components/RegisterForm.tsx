@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema, type SignUpInput } from "../types/auth";
 import { useSignUp, useSignIn } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { AuthInput, authSchema } from "../types/auth";
 
 export default function RegisterForm() {
-  const { register, handleSubmit, formState } = useForm<SignUpInput>({
-    resolver: zodResolver(signUpSchema),
+  const { register, handleSubmit, formState } = useForm<AuthInput>({
+    resolver: zodResolver(authSchema),
     defaultValues: { username: "", password: "" },
   });
   const { errors } = formState;
@@ -19,7 +19,7 @@ export default function RegisterForm() {
 
   const isPending = signUp.isPending || signIn.isPending;
 
-  const onSubmit = async (data: SignUpInput) => {
+  const onSubmit = async (data: AuthInput) => {
     setFlowError(null);
     try {
       await signUp.mutateAsync(data);

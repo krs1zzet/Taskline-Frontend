@@ -2,21 +2,21 @@
 import { useForm } from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useSignIn} from "../hooks/useAuth";
-import { signInSchema,SignInInput } from "../types/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthInput, authSchema } from "../types/auth";
 
 
 
 export default function LoginForm(){
-    const {register, handleSubmit,formState} = useForm<SignInInput>({
-        resolver: zodResolver(signInSchema),
+    const {register, handleSubmit,formState} = useForm<AuthInput>({
+        resolver: zodResolver(authSchema),
     });
 
     const {errors} = formState;
     const signIn = useSignIn();
     const navigate = useNavigate();
 
-    const onSubmit = (data: SignInInput) => {
+    const onSubmit = (data: AuthInput) => {
         signIn.mutate(data);
     }
 

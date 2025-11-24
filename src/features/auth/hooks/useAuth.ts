@@ -2,7 +2,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchMe, signIn, signOut, signUp } from "../api/authApi";
 import { useNavigate } from "react-router";
-import type { SignInInput, SignUpInput, UserDTO } from "../types/auth";
+import type { AuthInput, UserDTO } from "../types/auth";
 
 const QK = { me: ["me"] as const };
 
@@ -19,7 +19,7 @@ export function useSignIn() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (input: SignInInput) => signIn(input),
+    mutationFn: (input: AuthInput) => signIn(input),
     onSuccess: async () => {
       await qc.invalidateQueries({ queryKey: QK.me });
       const back = sessionStorage.getItem("postLoginRedirect");
@@ -33,7 +33,7 @@ export function useSignUp() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (input: SignUpInput) => signUp(input),
+    mutationFn: (input: AuthInput) => signUp(input),
     onSuccess: async (_data, variables) => {
       await signIn(variables);
       await qc.invalidateQueries({ queryKey: QK.me });

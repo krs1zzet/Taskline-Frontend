@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser, useSignOut } from "../../features/auth/hooks/useAuth";
+import { config } from "../../config/config";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const { data: me, isLoading } = useAuthUser();
   const signOut = useSignOut();
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
 
   const handleSignOut = () => {
     signOut.mutate(undefined, { onSuccess: () => navigate("/", { replace: true }) });
   };
+
+  const handleJiraLogin = () => {
+    const apiBase = config.API_BASE.replace(/\/$/, ""); // sondaki / gider
+    window.location.href = `${apiBase}/api/atlassian/OAuth/authorize`;
+    };
+
+
 
   return (
     <header className="border-b">
@@ -24,10 +32,10 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between w-full md:w-auto">
           <div
-            className="cursor-pointer font-bold text-2xl md:text-3xl" 
+            className="cursor-pointer font-bold text-2xl md:text-3xl"
             onClick={() => navigate("/")}
           >
-            ClubManagement
+            Taskline
           </div>
 
           <button
@@ -69,6 +77,13 @@ export default function Navbar() {
               >
                 Sign Up
               </button>
+              <button
+                onClick={handleJiraLogin}
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg"
+              >
+                Login With Jira
+              </button>
+
             </>
           )}
         </div>
@@ -126,6 +141,15 @@ export default function Navbar() {
                 className="w-full text-left px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
                 Sign Up
+              </button>
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  handleJiraLogin();
+                }}
+                className="w-full text-left px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Login With Jira
               </button>
             </>
           )}

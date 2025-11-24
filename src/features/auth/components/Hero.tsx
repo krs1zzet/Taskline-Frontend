@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import img from "../assets/Mail.jpeg";
+import img from "../assets/ganttimg.png";
 
 export default function Hero() {
   return (
@@ -7,10 +7,10 @@ export default function Hero() {
       <div className="flex">
         <ul className="flex flex-col gap-6 max-w-md text-start font-custom-inter">
           <li className="font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight">
-            Automate your Mail tasks in days, not weeks
+            Your Jira Gantt Helper
           </li>
           <li className="text-heroTextLight text-base sm:text-lg md:text-xl">
-            Stop wasting time on copy-paste. Create reports, clean data, and manage files automatically with ready-to-use templates.
+            Stop wasting time on jira UI.
           </li>
           <li>
             <Link
