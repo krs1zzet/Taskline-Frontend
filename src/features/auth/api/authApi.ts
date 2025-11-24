@@ -17,6 +17,6 @@ export async function signOut(): Promise<void>{
 }
 
 export async function fetchMe(): Promise<UserDTO>{
-    const res = await http.get<UserDTO>("/auth/me");
+    const res = await http.get<UserDTO>("/users/me");
     return res.data;
 }
