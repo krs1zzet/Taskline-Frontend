@@ -6,6 +6,8 @@ import HomePage from "./routes/HomePage";
 import DashboardPage from "./routes/DashboardPage";
 import Layout from "../components/layout/Layout";
 import ProtectedRoute from "../features/auth/components/ProtectedRoute";
+import PrivacyPolicyPage from "./routes/PrivacyPage";
+import TermsOfServicePage from "./routes/TermsPage";
 
 export default function Router() {
   return (
@@ -16,6 +18,8 @@ export default function Router() {
           <Route index element={<HomePage />} />    
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsOfServicePage />} />
         </Route>
 
         {/* Protected group (Layout + koruma) */}

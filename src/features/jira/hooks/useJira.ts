@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { IssueLinkTypesDTO } from "../jira/types/jira";
-import { getIssueLinkTypes } from "../jira/api/jiraApi";
+import { IssueLinkTypesDTO } from "../types/jira";
+import { getIssueLinkTypes } from "../api/jiraApi";
+
 
 const QK = {
   issueLinksAll: ["links"] as const,
