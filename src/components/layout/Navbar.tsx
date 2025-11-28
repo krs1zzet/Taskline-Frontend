@@ -3,34 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { useAuthUser, useSignOut } from "../../features/auth/hooks/useAuth";
 import { config } from "../../config/config";
 
-export default function Navbar() {
+type NavbarProps = {
+  onSidebarToggle?: () => void;
+  isProtectedRoute?: boolean;
+};
+
+export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: NavbarProps) {
   const navigate = useNavigate();
   const { data: me, isLoading } = useAuthUser();
-  const signOut = useSignOut();
-  const [open, setOpen] = useState(false);
 
-  const handleSignOut = () => {
-    signOut.mutate(undefined, { onSuccess: () => navigate("/", { replace: true }) });
-  };
 
   const handleJiraLogin = () => {
-    const apiBase = config.API_BASE.replace(/\/$/, ""); // sondaki / gider
+    const apiBase = config.API_BASE.replace(/\/$/, "");
     window.location.href = `${apiBase}/api/atlassian/OAuth/authorize`;
-    };
-
-
+  };
 
   return (
     <header className="border-b">
-      <nav
-        className="
-          w-full
-          flex items-center
-          min-h-[72px]
-          px-4 sm:px-6 md:px-10        
-        "
-      >
-        <div className="flex items-center justify-between w-full md:w-auto">
+      <nav className="w-full flex items-center  min-h-[72px] px-4 sm:px-6 md:px-10">
+        <div className="flex items-center gap-3">
           <div
             className="cursor-pointer font-bold text-2xl md:text-3xl"
             onClick={() => navigate("/")}
@@ -38,34 +29,36 @@ export default function Navbar() {
             Taskline
           </div>
 
-          <button
-            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100"
-            aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
-            aria-expanded={open}
-            onClick={() => setOpen((s) => !s)}
-          >
-            <svg className="h-6 w-6" viewBox="0 0 24 24" aria-hidden>
-              {open ? (
-                <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" />
-              ) : (
+
+          {/* ✅ Mobilde sadece hamburger kalsın */}
+          {onSidebarToggle && (
+            <button
+              className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100"
+              aria-label="Sidebar'ı aç/kapat"
+              onClick={onSidebarToggle}
+            >
+              <svg className="h-6 w-6" viewBox="0 0 24 24" aria-hidden>
                 <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" />
-              )}
-            </svg>
-          </button>
+              </svg>
+            </button>
+          )}
         </div>
+
+        {isProtectedRoute && (
+          <div className="flex-1 flex justify-center px-3">
+            <div className="w-full max-w-xl">
+              Search
+            </div>
+          </div>
+        )}
+
+
 
         <div className="hidden md:flex items-center gap-3 ml-auto">
           {isLoading ? (
             <div className="w-24 h-6 bg-gray-300 animate-pulse rounded" />
           ) : me ? (
-            <>
-              <button
-                onClick={handleSignOut}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-              >
-                Sign Out
-              </button>
-            </>
+            <></>
           ) : (
             <>
               <button onClick={() => navigate("/login")} className="hover:underline">
@@ -83,78 +76,10 @@ export default function Navbar() {
               >
                 Login With Jira
               </button>
-
             </>
           )}
         </div>
       </nav>
-
-      <div
-        className={`
-          md:hidden
-          overflow-hidden
-          transition-[max-height,opacity] duration-300
-          ${open ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}
-          border-t
-        `}
-      >
-        <div className="px-4 sm:px-6 py-3 flex flex-col gap-3">
-          {isLoading ? (
-            <div className="w-24 h-6 bg-gray-300 animate-pulse rounded" />
-          ) : me ? (
-            <>
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/dashboard");
-                }}
-                className="w-full text-left px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-              >
-                Dashboard
-              </button>
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  handleSignOut();
-                }}
-                className="w-full text-left px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-              >
-                Sign Out
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/login");
-                }}
-                className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/register");
-                }}
-                className="w-full text-left px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Sign Up
-              </button>
-              <button
-                onClick={() => {
-                  setOpen(false);
-                  handleJiraLogin();
-                }}
-                className="w-full text-left px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Login With Jira
-              </button>
-            </>
-          )}
-        </div>
-      </div>
     </header>
   );
 }
