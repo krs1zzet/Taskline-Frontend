@@ -49,6 +49,7 @@ export const NAV_ITEMS: NavItem[] = [
     section: "top",
     showIf: (ctx) => ctx.isAuthed && !isOn("/main-page")(ctx),
   },
+  
   {
     type: "action",
     label: "Sign Out",
