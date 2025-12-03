@@ -24,7 +24,7 @@ export default function RegisterForm() {
     try {
       await signUp.mutateAsync(data);
       await signIn.mutateAsync(data);
-      navigate("/dashboard", { replace: true });
+      navigate("/main-page", { replace: true });
     } catch (err: any) {
       const apiMsg =
         err?.response?.data?.message ??
