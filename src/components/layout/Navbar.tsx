@@ -24,13 +24,12 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
         <div className="flex items-center gap-3">
           <div
             className="cursor-pointer font-bold text-2xl md:text-3xl"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/main-page")}
           >
             Taskline
           </div>
 
 
-          {/* ✅ Mobilde sadece hamburger kalsın */}
           {onSidebarToggle && (
             <button
               className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100"
@@ -47,7 +46,7 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
         {isProtectedRoute && (
           <div className="flex-1 flex justify-center px-3">
             <div className="w-full max-w-xl">
-              Search
+              
             </div>
           </div>
         )}

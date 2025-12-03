@@ -10,6 +10,7 @@ import PrivacyPolicyPage from "./routes/PrivacyPage";
 import TermsOfServicePage from "./routes/TermsPage";
 import GanttPage from "./routes/GanttPage";
 import Layout from "../components/layout/Layout";
+import MainPage from "./routes/MainPage";
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
 
         {/* Protected group */}
         <Route element={<ProtectedRoute><ProtectedLayout /></ProtectedRoute>}>
+          <Route path="/main-page" element = {<MainPage/>}/>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/gantt" element={<GanttPage />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />

@@ -47,10 +47,10 @@ const GanttDemo: React.FC<GanttDemoProps> = ({
 
     return [
       {
-        id: "p1",
-        name: "Taskline MVP",
-        type: "project",
-        start: p1Start,
+        id: "p1", //key
+        name: "Taskline MVP", // name
+        type: "project", // type
+        start: p1Start, //
         end: p1End,
         progress: 28,
         hideChildren: false,
