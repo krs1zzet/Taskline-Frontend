@@ -30,8 +30,7 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
           </div>
 
         {isProtectedRoute && <SearchBar />}
-
-        {/* ✅ Mobilde sadece hamburger kalsın */}
+        </div>
         {onSidebarToggle && (
           <button
             className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100"
