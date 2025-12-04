@@ -74,6 +74,7 @@ export default function SearchBar() {
                   if (key) navigate(`/issues/${encodeURIComponent(key)}`);
                   setQ(key ?? q);
                 }}
+                
                 className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-2"
               >
                 <span className="font-medium text-sm">{it.key ?? it.issueKey}</span>

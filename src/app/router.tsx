@@ -11,6 +11,9 @@ import TermsOfServicePage from "./routes/TermsPage";
 import GanttPage from "./routes/GanttPage";
 import Layout from "../components/layout/Layout";
 import MainPage from "./routes/MainPage";
+import IssueDashboardPage from "./routes/Issue/IssueDashboardPage";
+import IssueGanttPage from "./routes/Issue/IssueGanttPage";
+import IssueExcelPage from "./routes/Issue/IssueExcelPage";
 
 export default function Router() {
   return (
@@ -26,11 +29,20 @@ export default function Router() {
 
         {/* Protected group */}
         <Route element={<ProtectedRoute><ProtectedLayout /></ProtectedRoute>}>
+
+          
           <Route path="/main-page" element = {<MainPage/>}/>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/gantt" element={<GanttPage />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
           <Route path="/terms" element={<TermsOfServicePage />} />
+
+          <Route path="/issues/:issueKey">
+            <Route index element = {<IssueDashboardPage/>}/>
+            <Route path="gantt" element = {<IssueGanttPage/>}/>
+            <Route path="excel"  element = {<IssueExcelPage/>}/>
+            
+          </Route>
 
         </Route>
 

@@ -18,10 +18,15 @@ export default function SidebarNav({ collapsed = false }: Props) {
     signOut: handleSignOut,
   } as const;
 
+  // active issueKey (e.g. /issues/PPM-328/gantt => PPM-328)
+  const match = location.pathname.match(/^\/issues\/([^/]+)/);
+  const activeIssueKey = match?.[1];
+
   // burası büyüdükçe genişler (roles, flags vs)
   const ctx: NavContext = {
     path: location.pathname,
     isAuthed: true, // TODO: auth state'inden çek (örn !!user)
+    activeIssueKey,
     // roles: user?.roles,
     // flags: featureFlags,
   };
@@ -31,7 +36,7 @@ export default function SidebarNav({ collapsed = false }: Props) {
   const collapsedCls = collapsed ? "justify-center" : "";
 
   // 👇 sadece burada filtre + action binding
-  const items: NavItem[] = NAV_ITEMS
+  const items: (NavItem & { onClick?: () => void })[] = NAV_ITEMS
     .filter((i) => (i.showIf ? i.showIf(ctx) : true))
     .map((i) => {
       if (i.type === "action") {
@@ -44,13 +49,16 @@ export default function SidebarNav({ collapsed = false }: Props) {
     const Icon = item.icon;
 
     if (item.type === "link") {
+      const href = typeof item.to === "function" ? item.to(ctx) : item.to;
+
       return (
         <NavLink
-          key={item.to}
-          to={item.to}
-          title={collapsed ? item.label : undefined}
-          className={({ isActive }) => [base, isActive ? active : "", collapsedCls].join(" ")}
-        >
+  key={`${item.label}-${href}`}
+  to={href}
+  end={item.end}   // ✅ ekle
+  title={collapsed ? item.label : undefined}
+  className={({ isActive }) => [base, isActive ? active : "", collapsedCls].join(" ")}
+>
           <Icon className="h-5 w-5 shrink-0" />
           <span className={collapsed ? "sr-only" : ""}>{item.label}</span>
         </NavLink>
