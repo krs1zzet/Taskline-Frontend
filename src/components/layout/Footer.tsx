@@ -6,11 +6,11 @@ export default function Footer() {
       className="border-t border-border/60 bg-background/70 supports-[backdrop-filter]:backdrop-blur"
       role="contentinfo"
     >
-      <div className="mx-auto max-w-7xl px-4 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className=" px-4 py-8 " >
+        <div className="flex flex-col min-w-full md:flex-row items-center justify-between gap-4">
           
           <div className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ClubSender. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Taskline. Tüm hakları saklıdır.
           </div>
 
           <nav className="flex gap-4 text-sm">
@@ -28,25 +28,10 @@ export default function Footer() {
             </Link>
           </nav>
 
-          <div className="flex gap-3">
-            <a
-              href="https://github.com/izzettinkarasayar"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              
-            </a>
-            <a
-              href="https://linkedin.com/in/izzettinkarasayar"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              
-            </a>
+          <div className="flex px-16 gap-4 text-sm">
+          <Link to="https://github.com/krs1zzet" className="hover:text-foreground">
+              #Github
+            </Link>
           </div>
         </div>
       </div>

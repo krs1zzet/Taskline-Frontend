@@ -20,17 +20,16 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
 
   return (
     <header className="border-b">
-      <nav className="flex items-center justify-between min-h-[72px] px-4">
-        <div
-          className="cursor-pointer font-bold text-2xl md:text-3xl"
-          onClick={() => navigate("/")}
-        >
-          Taskline
-        </div>
+      <nav className="w-full flex justify-between items-center  min-h-[72px] px-4 sm:px-6 md:px-10">
+          <div
+            className="cursor-pointer font-bold text-2xl md:text-3xl"
+            onClick={() => navigate("/main-page")}
+          >
+            Taskline
+          </div>
 
         {isProtectedRoute && <SearchBar />}
 
-        {/* ✅ Mobilde sadece hamburger kalsın */}
         {onSidebarToggle && (
           <button
             className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg hover:bg-gray-100"

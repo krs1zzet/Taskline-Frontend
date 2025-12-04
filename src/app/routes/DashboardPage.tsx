@@ -1,4 +1,4 @@
-import { useJiraLink } from "../../features/jira/hooks/useJira";
+import { useJiraLink } from "../../features/jira/issues/hooks/useJira";
 
 export default function DashboardPage() {
   const { data: links, isLoading, error } = useJiraLink();

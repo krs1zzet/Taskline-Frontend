@@ -43,7 +43,6 @@ export default function ProtectedLayout() {
           </main>
         </SidebarShell>
   
-        <Footer />
       </div>
     );
   }

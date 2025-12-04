@@ -1,4 +1,4 @@
-import { http } from "../../../lib/http";
+import { http } from "../../../../lib/http";
 import { IssueLinkTypesDTO } from "../types/jira";
 
 export async function getIssueLinkTypes(): Promise<IssueLinkTypesDTO> {

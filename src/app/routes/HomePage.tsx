@@ -14,7 +14,7 @@ export default function HomePage() {
   }
 
   if (user) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/main-page" replace />;
   }
 
   return (
