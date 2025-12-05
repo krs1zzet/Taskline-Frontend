@@ -70,12 +70,12 @@ export const NAV_ITEMS: NavItem[] = [
     showIf: (ctx) => ctx.isAuthed && !!ctx.activeIssueKey,
   },
 
-  {
-    type: "action",
-    label: "Sign Out",
-    icon: LogOut,
-    section: "bottom",
-    onClickKey: "signOut",
-    showIf: (ctx) => ctx.isAuthed,
-  },
+  // {
+  //   type: "action",
+  //   label: "Sign Out",
+  //   icon: LogOut,
+  //   section: "bottom",
+  //   onClickKey: "signOut",
+  //   showIf: (ctx) => ctx.isAuthed,
+  // },
 ];
