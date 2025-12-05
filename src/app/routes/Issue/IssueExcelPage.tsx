@@ -1,7 +1,9 @@
+import FrappeGanttDemo from "../../../features/gantt/frappe-gant";
+
 export default function IssueExcelPage(){
     return(
-        <>
-        IssuePage excel
-        </>
+        <div >
+            <FrappeGanttDemo/>
+        </div>
     )
 }

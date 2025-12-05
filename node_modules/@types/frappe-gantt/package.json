@@ -1,0 +1,37 @@
+{
+    "name": "@types/frappe-gantt",
+    "version": "0.9.0",
+    "description": "TypeScript definitions for frappe-gantt",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/frappe-gantt",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Sam Alexander",
+            "githubUsername": "samalexander",
+            "url": "https://github.com/samalexander"
+        },
+        {
+            "name": "Elijah Lucian",
+            "githubUsername": "eli7vh",
+            "url": "https://github.com/eli7vh"
+        },
+        {
+            "name": "Rahul Singh",
+            "githubUsername": "IILimitlessII",
+            "url": "https://github.com/IILimitlessII"
+        }
+    ],
+    "type": "module",
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/frappe-gantt"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "peerDependencies": {},
+    "typesPublisherContentHash": "f6de551da8584a6a3bd9f6d23ac70b37569ac186134a21d1a013548a6b77f207",
+    "typeScriptVersion": "5.0"
+}

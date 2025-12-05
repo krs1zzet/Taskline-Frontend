@@ -1,0 +1,15 @@
+# Installation
+> `npm install --save @types/frappe-gantt`
+
+# Summary
+This package contains type definitions for frappe-gantt (https://github.com/frappe/gantt).
+
+# Details
+Files were exported from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/frappe-gantt.
+
+### Additional Details
+ * Last updated: Mon, 03 Mar 2025 20:02:35 GMT
+ * Dependencies: none
+
+# Credits
+These definitions were written by [Sam Alexander](https://github.com/samalexander), [Elijah Lucian](https://github.com/eli7vh), and [Rahul Singh](https://github.com/IILimitlessII).
