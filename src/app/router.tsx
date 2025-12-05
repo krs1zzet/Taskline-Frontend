@@ -14,6 +14,7 @@ import MainPage from "./routes/MainPage";
 import IssueDashboardPage from "./routes/Issue/IssueDashboardPage";
 import IssueGanttPage from "./routes/Issue/IssueGanttPage";
 import IssueExcelPage from "./routes/Issue/IssueExcelPage";
+import IssueGanttPagev2 from "./routes/Issue/IssueGanttPagev2";
 
 export default function Router() {
   return (
@@ -40,6 +41,7 @@ export default function Router() {
           <Route path="/issues/:issueKey">
             <Route index element = {<IssueDashboardPage/>}/>
             <Route path="gantt" element = {<IssueGanttPage/>}/>
+            <Route path="ganttv2" element = {<IssueGanttPagev2/>}/>
             <Route path="excel"  element = {<IssueExcelPage/>}/>
             
           </Route>

@@ -25,18 +25,20 @@ export default function ProtectedLayout() {
     }, [collapsed]);
   
     if (isLoading) return <div className="min-h-screen" />;
-  
+    const hideSidebar = ["/", "/main-page"].includes(location.pathname);
+
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar onSidebarToggle={() => setMobileOpen((v) => !v) } isProtectedRoute />
 
-  
+
         <SidebarShell
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
           collapsed={collapsed}
           onToggleCollapsed={() => setCollapsed((v) => !v)}
           sidebar={<SidebarNav collapsed={collapsed} />}
+          hideSidebar = {hideSidebar}
         >
           <main className="flex-1 min-w-0 p-4">
             <Outlet />

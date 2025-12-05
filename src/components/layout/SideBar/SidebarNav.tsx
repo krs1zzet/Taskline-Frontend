@@ -3,6 +3,7 @@ import { useSignOut } from "../../../features/auth/hooks/useAuth";
 import { NAV_ITEMS, NavContext, NavItem } from "./NavItems";
 
 type Props = { collapsed?: boolean };
+const HIDE_SIDEBAR_PATHS = ["/main-page", "/issues", "/"];
 
 export default function SidebarNav({ collapsed = false }: Props) {
   const signOut = useSignOut();
@@ -13,30 +14,29 @@ export default function SidebarNav({ collapsed = false }: Props) {
     signOut.mutate(undefined, { onSuccess: () => navigate("/", { replace: true }) });
   };
 
-  // action key -> gerçek handler map’i
   const actions = {
     signOut: handleSignOut,
   } as const;
 
-  // active issueKey (e.g. /issues/PPM-328/gantt => PPM-328)
+
   const match = location.pathname.match(/^\/issues\/([^/]+)/);
   const activeIssueKey = match?.[1];
 
-  // burası büyüdükçe genişler (roles, flags vs)
   const ctx: NavContext = {
     path: location.pathname,
-    isAuthed: true, // TODO: auth state'inden çek (örn !!user)
+    isAuthed: true,
     activeIssueKey,
-    // roles: user?.roles,
-    // flags: featureFlags,
   };
+
+  const shouldHideSidebar = HIDE_SIDEBAR_PATHS.includes(location.pathname);
 
   const base = "flex items-center gap-3 rounded px-3 py-2 text-sm hover:bg-gray-100";
   const active = "bg-gray-100 font-medium";
   const collapsedCls = collapsed ? "justify-center" : "";
 
-  // 👇 sadece burada filtre + action binding
-  const items: (NavItem & { onClick?: () => void })[] = NAV_ITEMS
+  const items: (NavItem & { onClick?: () => void })[] = shouldHideSidebar
+  ? []
+  : NAV_ITEMS
     .filter((i) => (i.showIf ? i.showIf(ctx) : true))
     .map((i) => {
       if (i.type === "action") {
@@ -53,12 +53,12 @@ export default function SidebarNav({ collapsed = false }: Props) {
 
       return (
         <NavLink
-  key={`${item.label}-${href}`}
-  to={href}
-  end={item.end}   // ✅ ekle
-  title={collapsed ? item.label : undefined}
-  className={({ isActive }) => [base, isActive ? active : "", collapsedCls].join(" ")}
->
+          key={`${item.label}-${href}`}
+          to={href}
+          end={item.end}   // ✅ ekle
+          title={collapsed ? item.label : undefined}
+          className={({ isActive }) => [base, isActive ? active : "", collapsedCls].join(" ")}
+        >
           <Icon className="h-5 w-5 shrink-0" />
           <span className={collapsed ? "sr-only" : ""}>{item.label}</span>
         </NavLink>

@@ -1,6 +1,6 @@
 // navItems.ts
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Settings, LogOut, Sheet } from "lucide-react";
+import { LayoutDashboard, Settings, LogOut, Sheet, ChartArea, GanttChart, GanttChartIcon, GanttChartSquare, FileSpreadsheetIcon, LayoutDashboardIcon } from "lucide-react";
 
 export type NavContext = {
   path: string;
@@ -40,7 +40,7 @@ export const NAV_ITEMS: NavItem[] = [
     type: "link",
     to: (ctx) => `/issues/${ctx.activeIssueKey}`,
     label: "Issue Dashboard",
-    icon: LayoutDashboard,
+    icon: LayoutDashboardIcon,
     end: true, // ✅ sadece tam /issues/:issueKey iken aktif
     showIf: (ctx) => ctx.isAuthed && !!ctx.activeIssueKey,
   },
@@ -48,8 +48,16 @@ export const NAV_ITEMS: NavItem[] = [
   {
     type: "link",
     to: (ctx) => `/issues/${ctx.activeIssueKey}/gantt`,
-    label: "Issue Gantt",
-    icon: Settings,
+    label: "React Gantt",
+    icon: GanttChart,
+    section: "top",
+    showIf: (ctx) => ctx.isAuthed && !!ctx.activeIssueKey,
+  },
+  {
+    type: "link",
+    to: (ctx) => `/issues/${ctx.activeIssueKey}/ganttv2`,
+    label: "Frappe Gantt",
+    icon: GanttChartSquare,
     section: "top",
     showIf: (ctx) => ctx.isAuthed && !!ctx.activeIssueKey,
   },
@@ -57,7 +65,7 @@ export const NAV_ITEMS: NavItem[] = [
     type: "link",
     to: (ctx) => `/issues/${ctx.activeIssueKey}/excel`,
     label: "Issue Excel",
-    icon: Sheet,
+    icon: FileSpreadsheetIcon,
     section: "top",
     showIf: (ctx) => ctx.isAuthed && !!ctx.activeIssueKey,
   },

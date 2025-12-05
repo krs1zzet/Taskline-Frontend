@@ -71,8 +71,8 @@ export default function SearchBar() {
                 type="button"
                 onClick={() => {
                   const key = it.key ?? it.issueKey;
-                  if (key) navigate(`/issues/${encodeURIComponent(key)}`);
-                  setQ(key ?? q);
+                  if (key) navigate(`/issues/${it.key}`);
+                  setQ("");
                 }}
                 
                 className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center gap-2"

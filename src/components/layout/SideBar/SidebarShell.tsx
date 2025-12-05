@@ -9,6 +9,8 @@ export type SidebarShellProps = {
 
   sidebar: React.ReactNode;
   children: React.ReactNode;
+
+  hideSidebar?: boolean; // 🔥 sidebar tamamen gizlensin mi?
 };
 
 export default function SidebarShell({
@@ -18,6 +20,7 @@ export default function SidebarShell({
   onToggleCollapsed,
   sidebar,
   children,
+  hideSidebar = false,
 }: SidebarShellProps) {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -28,38 +31,50 @@ export default function SidebarShell({
 
   return (
     <div className="flex flex-1">
-      {/* Desktop */}
-      <aside
-        className={[
-          "hidden md:flex flex-col border-r bg-white",
-          "transition-[width] duration-200 ease-out",
-          collapsed ? "w-12" : "w-48",
-        ].join(" ")}
-      >
-        <div
+
+      {/* ========================== */}
+      {/* 🔥 Desktop Sidebar */}
+      {/* ========================== */}
+      {!hideSidebar && (
+        <aside
           className={[
-            "h-14 border-b flex items-center",
-            collapsed ? "justify-center" : "justify-between px-3",
+            "hidden md:flex flex-col border-r bg-white",
+            "transition-[width] duration-200 ease-out",
+            collapsed ? "w-12" : "w-48",
           ].join(" ")}
         >
-          {!collapsed && <span className="font-semibold">Menu</span>}
-          <button
-            onClick={onToggleCollapsed}
-            className="rounded px-2 py-1.5 hover:bg-gray-100"
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            title={collapsed ? "Expand" : "Collapse"}
+          <div
+            className={[
+              "h-14 border-b flex items-center",
+              collapsed ? "justify-center" : "justify-between px-3",
+            ].join(" ")}
           >
-            {collapsed ? "»" : "«"}
-          </button>
-        </div>
+            {!collapsed && <span className="font-semibold">Menu</span>}
+            <button
+              onClick={onToggleCollapsed}
+              className="rounded px-2 py-1.5 hover:bg-gray-100"
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              title={collapsed ? "Expand" : "Collapse"}
+            >
+              {collapsed ? "»" : "«"}
+            </button>
+          </div>
 
-        <div>{sidebar}</div>
-      </aside>
+          <div>{sidebar}</div>
+        </aside>
+      )}
 
-      {/* Mobile drawer */}
-      {open && (
+      {/* ========================== */}
+      {/* 🔥 Mobile Drawer Sidebar */}
+      {/* ========================== */}
+      {open && !hideSidebar && (
         <div className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true">
-          <button className="absolute inset-0 bg-black/40" onClick={onClose} aria-label="Close sidebar" />
+          <button
+            className="absolute inset-0 bg-black/40"
+            onClick={onClose}
+            aria-label="Close sidebar"
+          />
+
           <aside
             className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl"
             tabIndex={-1}
@@ -67,17 +82,25 @@ export default function SidebarShell({
           >
             <div className="h-14 border-b px-3 flex items-center justify-between">
               <span className="font-semibold">Menu</span>
-              <button className="rounded px-3 py-1.5 hover:bg-gray-100" onClick={onClose}>
+              <button
+                className="rounded px-3 py-1.5 hover:bg-gray-100"
+                onClick={onClose}
+              >
                 Kapat
               </button>
             </div>
-            <div className="p-2">{/* mobile always expanded */}{sidebar}</div>
+
+            <div className="p-2">{sidebar}</div>
           </aside>
         </div>
       )}
 
-      {/* Content */}
-      <div className="flex-1 min-w-0">{children}</div>
+      {/* ========================== */}
+      {/* 🔥 Content */}
+      {/* ========================== */}
+      <div className="flex-1 min-w-0">
+        {children}
+      </div>
     </div>
   );
 }

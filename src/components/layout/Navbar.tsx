@@ -41,6 +41,7 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
             </svg>
           </button>
         )}
+        
 
         {
           !me ?(
