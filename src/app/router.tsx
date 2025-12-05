@@ -24,7 +24,8 @@ export default function Router() {
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsOfServicePage />} />
         </Route>
 
         {/* Protected group */}
@@ -34,8 +35,7 @@ export default function Router() {
           <Route path="/main-page" element = {<MainPage/>}/>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/gantt" element={<GanttPage />} />
-          <Route path="/privacy" element={<PrivacyPolicyPage />} />
-          <Route path="/terms" element={<TermsOfServicePage />} />
+
 
           <Route path="/issues/:issueKey">
             <Route index element = {<IssueDashboardPage/>}/>

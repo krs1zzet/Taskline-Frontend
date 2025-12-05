@@ -22,7 +22,7 @@ export default function SearchBar() {
       onSubmit={(e) => {
         e.preventDefault();
         if (!q.trim()) return;
-        navigate(`/issues?query=${encodeURIComponent(q.trim())}`);
+        navigate(`/issues/${encodeURIComponent(q.trim())}`);
       }}
     >
       <label className="block mb-2.5 text-sm font-medium text-heading sr-only">
