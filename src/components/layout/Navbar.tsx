@@ -42,7 +42,9 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
           </button>
         )}
 
-        <div className="hidden md:flex items-center gap-3">
+        {
+          !me ?(
+        <div className="flex items-center gap-3">
           {isLoading ? (
             <div className="w-24 h-6 bg-gray-300 animate-pulse rounded" />
           ) : me ? (
@@ -66,7 +68,10 @@ export default function Navbar({ onSidebarToggle, isProtectedRoute = false }: Na
               </button>
             </>
           )}
+          
         </div>
+        ) : (null)
+        }
       </nav>
     </header>
   );
